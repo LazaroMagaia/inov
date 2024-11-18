@@ -15,7 +15,7 @@
     <style>
         /* Custom styles for the logo */
         .logo {
-            max-width: 250px; /* Adjust based on your logo's dimensions */
+            max-width: 307px; /* Adjust based on your logo's dimensions */
             margin: 0 auto;
         }
     </style>
@@ -25,11 +25,11 @@
     <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md  mt-8 mb-8">
         <!-- Logo -->
         <div class="text-center mb-8">
-            <img src="{{ asset('images/Logo-com-Moldura-inovt.jpg') }}" alt="Company Logo" 
+            <img src="{{ asset('images/logo-2.jpeg') }}" alt="Company Logo" 
                 class="logo h-20 object-contain">
         </div>
 
-        <h1 class="text-2xl font-bold mb-6 text-center">Cadastro de usuarios </h1>
+        <h1 class="text-2xl font-bold mb-6 text-center" style="font-size: 18px;">Cadastro de usuários </h1>
         
         <!-- Session Status -->
         @if (session('status'))

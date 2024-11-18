@@ -70,7 +70,7 @@
 <!-- DataTables Initialization -->
 <script>
     $(document).ready(function() {
-        $('#example,#example2').DataTable({
+       var table = $('#example').DataTable({
             "pagingType": "simple_numbers", // Paginação simples com números
             "language": {
                 "search": "Buscar:",
@@ -81,6 +81,33 @@
                 "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas"
             },
             "order": [[0, 'desc']] // Ordena pela coluna `id` (índice 0) em ordem decrescente
+        });
+        
+        $('#example2').DataTable({
+            "pagingType": "simple_numbers", // Paginação simples com números
+            "language": {
+                "search": "Buscar:",
+                "paginate": {
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                },
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas"
+            },
+            "order": [[0, 'desc']] // Ordena pela coluna `id` (índice 0) em ordem decrescente
+        });
+
+        $('#filter-awaiting').on('click', function () {
+            table.column(4).search('Não').draw();
+        });
+
+        // Filtra perguntas "Respondidas"
+        $('#filter-answered').on('click', function () {
+            table.column(4).search('Sim').draw();
+        });
+
+        // Exibe todas as perguntas
+        $('#filter-all').on('click', function () {
+            table.column(4).search('').draw();
         });
     });
 </script>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cursos;
 use App\Models\Videos;
 use App\Models\Perguntas;
-use App\Models\Video_User;
+use App\Models\VideoUsers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Group;
@@ -182,7 +182,7 @@ class CursosController extends Controller
         // Mapeia os vídeos com a informação de se foram assistidos ou não pelo usuário
 
         foreach ($videos as $video) {
-            $watchedRecord = Video_User::where('videos_id', $video->id)->where('user_id', $user->id)->first();
+            $watchedRecord = VideoUsers::where('video_id', $video->id)->where('user_id', $user->id)->first();
             $video->watched = $watchedRecord ? $watchedRecord->watched : false;
             $video->progress = $watchedRecord ? $watchedRecord->progress : 0;
         }
@@ -203,7 +203,7 @@ class CursosController extends Controller
         ->wherePivot('watched', true)->exists();
         
         foreach ($data['videos'] as $video) {
-            $watchedRecord = Video_User::where('videos_id', $video->id)->where('user_id', $data["user"]->id)->first();
+            $watchedRecord = VideoUsers::where('video_id', $video->id)->where('user_id', $data["user"]->id)->first();
             $video->watched = $watchedRecord ? $watchedRecord->watched : false;
             $video->progress = $watchedRecord ? $watchedRecord->progress : 0;
         }

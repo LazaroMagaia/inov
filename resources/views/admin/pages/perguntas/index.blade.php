@@ -83,6 +83,10 @@ use App\Helpers\GeralHelper;
                         <h4 class="text-xl font-semibold text-[#849f54]">Gerencie as dúvidas dos clientes</h4>
                     </div>
                     <div>
+                        <!-- Botões de Filtro -->
+                        <button id="filter-awaiting" class="bg-[#849f54] text-white px-3 py-1 rounded-lg hover:bg-[#6b9677]">Aguardando Respostas</button>
+                        <button id="filter-answered"  class="bg-[#849f54] text-white px-3 py-1 rounded-lg hover:bg-[#6b9677]">Respondidas</button>
+                        <button id="filter-all" class="bg-[#849f54] text-white px-3 py-1 rounded-lg hover:bg-[#6b9677]">Todas</button>
                         <table id="example" class="relative w-full bg-white border">
                             <thead class="bg-[#849f54] text-white">
                                 <tr>
@@ -90,6 +94,7 @@ use App\Helpers\GeralHelper;
                                     <th class="py-2 px-4 text-xs font-medium uppercase tracking-wider">Curso</th>
                                     <th class="py-2 px-4 text-xs font-medium uppercase tracking-wider">Imagem do vídeo</th>
                                     <th class="py-2 px-4 text-xs font-medium uppercase tracking-wider">Aula</th>
+                                    <th class="py-2 px-4 text-xs font-medium uppercase tracking-wider">Respondida?</th>
                                     <th class="py-2 px-4 text-xs font-medium uppercase tracking-wider">Ações</th>
                                 </tr>
                             </thead>
@@ -117,6 +122,10 @@ use App\Helpers\GeralHelper;
 
                                     <td class="py-2 px-4 border-b text-sm font-medium text-gray-800">
                                         {{$video->sequence}}
+                                    </td>
+
+                                    <td class="py-2 px-4 border-b text-sm font-medium text-gray-800">
+                                        {{$pergunta->respondida == 1 ? 'Sim' : 'Não'}}
                                     </td>
 
                                     <td class="flex justify-left gap-2">

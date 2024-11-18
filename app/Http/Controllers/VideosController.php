@@ -9,9 +9,8 @@ use App\Models\Cursos;
 use App\Models\Perguntas;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Video_User;
+use App\Models\VideoUsers;
 use App\Models\video_curso_user;
-use App\Models\Video_users;
 use App\Models\videos_watched;
 
 class VideosController extends Controller
@@ -204,7 +203,7 @@ class VideosController extends Controller
             $data["page_name"] = "Vincular Aula ao aluno";
             $data["user"] = Auth::user();
             // Buscar IDs dos usuários já vinculados a este curso e vídeo
-            $usuariosVinculadosIds = Video_users::where('video_id', $videoId)
+            $usuariosVinculadosIds = VideoUsers::where('video_id', $videoId)
             ->pluck('user_id')
             ->toArray();
             
@@ -236,7 +235,7 @@ class VideosController extends Controller
         {
             // Adiciona novas vinculações
             foreach ($userIds as $userId) {
-                Video_users::create([
+                VideoUsers::create([
                     'user_id' => $userId,
                     'video_id' => $videoId
                 ]);
@@ -268,7 +267,7 @@ class VideosController extends Controller
             if(!$cursoId)
             {
                 // Remover as associações existentes
-                Video_users::whereIn('user_id', $userIds)
+                VideoUsers::whereIn('user_id', $userIds)
                     ->where('video_id', $videoId)
                     ->delete();
             }
@@ -288,7 +287,7 @@ class VideosController extends Controller
     {
         $data["page_name"] = "Videos";
         $data["user"] = Auth::user();
-        $videos_users_ids = Video_users::where('user_id',$data['user']->id)->pluck('video_id')->toArray();
+        $videos_users_ids = VideoUsers::where('user_id',$data['user']->id)->pluck('video_id')->toArray();
         $data['video_cursos'] =  video_curso_user::where('user_id',$data['user']->id)->pluck('video_id')->toArray();
         $videos = [];
         // Mesclando os dois arrays
@@ -310,7 +309,24 @@ class VideosController extends Controller
             }
         }
         $data['videos'] = $videos;
-        //dd($data['videos']);
         return view('frontend.dashboard.pages.videos.index',$data);
+    }
+    public function frontendVideSingle($id)
+    {
+        $data["page_name"] = "Videos";
+        $data["user"] = Auth::user();
+        $data['video'] = Videos::with('curso')->find($id);
+        $data['watchedVideo'] = videos_watched::where('videos_id', $id)
+        ->where('user_id',$data["user"]->id)->first();
+        if(!$data['watchedVideo'])
+        {
+            $data['watchedVideo'] = new videos_watched();
+            $data['watchedVideo']->videos_id = $id;
+            $data['watchedVideo']->user_id = $data["user"]->id;
+            $data['watchedVideo']->progress = 0;
+            $data['watchedVideo']->watched = false;
+            $data['watchedVideo']->save();
+        }
+        return view('frontend.dashboard.pages.videos.single',$data);
     }
 }

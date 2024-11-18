@@ -9,4 +9,8 @@ class videos_watched extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'videos_id', 'watched','progress'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

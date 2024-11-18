@@ -126,7 +126,7 @@
                                             <!-- Barra de progresso restante -->
                                             <div class="absolute inset-0 bg-[#797D41] rounded">
                                                 <!-- Barra de progresso -->
-                                                 @if($video->watched == 1)
+                                                @if($video->watched == 1)
                                                     <div class="bg-[#007D00] h-2 rounded"
                                                         style="width: 100%;"></div>
                                                 @else
@@ -143,11 +143,10 @@
                                             <div class="absolute inset-0 bg-[#849f54] h-2 rounded 
                                             opacity-50"></div>
                                         </div>
-                                        <button class="mt-4 inline-block px-4 py-2 bg-[#849f54] text-white 
-                                            rounded-md hover:bg-[#6b9677]"
-                                            data-modal-target="#videoAulaModal{{$video->id}}">
-                                            Ver Vídeo
-                                        </button>
+                                        
+                                        <a href="{{route('client.videos.single',$video->id)}}"
+                                            class="mt-4 inline-block px-4 py-2 bg-[#849f54] text-white 
+                                            rounded-md hover:bg-[#6b9677]">Ver Vídeo</a>
                                     </div>
                                 </div>
                             @endforeach

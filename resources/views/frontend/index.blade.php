@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 
-                <div class="bg-white shadow-md rounded-lg p-4">
+                {{-- <div class="bg-white shadow-md rounded-lg p-4">
                     <div class="flex items-center space-x-4">
                         <div class="flex-shrink-0">
                             <div class="bg-red-500 text-white flex items-center justify-center w-16 h-16 rounded-full mb-2">
@@ -118,7 +118,7 @@
                             <h6 class="text-xl font-extrabold mb-0">{{$total_videos}}</h6>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!--- Cards -->
         </main>

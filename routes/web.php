@@ -82,7 +82,7 @@ Route::middleware(['auth', 'check.user.session'])->group(function () {
         ->name('admin.videos.delete');
         Route::get('admin/duvidas', [PerguntasController::class, 'AdminPerguntas'])
         ->name('admin.perguntas.index');
-
+        
           /**
          * GRUPOS
          */
@@ -125,6 +125,9 @@ Route::middleware(['auth', 'check.user.session'])->group(function () {
         Route::get('/client/videos', [VideosController::class, 'frontendVideo'])->name('client.videos.index');
         Route::get('/client/videos/detalhe/{id}', [VideosController::class, 'client_detalhe_video'])
         ->name('client.videos.detalhe');
+        Route::get('/client/videos/single/{id}', [VideosController::class, 'frontendVideSingle'])
+        ->name('client.videos.single');
+        
 
         /*         PERFIL         */
         Route::get('/client/perfil', [PerfilController::class, 'index'])->name('client.perfil');
